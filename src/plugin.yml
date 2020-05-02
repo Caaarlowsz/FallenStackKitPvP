@@ -1,0 +1,9 @@
+name: FallenKitPvP
+description: Fallen Stack Kit PvP Core
+version: 1.0
+main: com.fallenstack.fallenkitpvp.FallenStackKitPvP
+commands:
+  sb:
+    description: This command spawns a falling blue wool block at the desired cords
+    permission: fallenkitpvp.fallenblockcommand
+

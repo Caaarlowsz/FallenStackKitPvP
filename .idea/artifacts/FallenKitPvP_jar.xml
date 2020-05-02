@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="FallenKitPvP:jar">
+    <output-path>$USER_HOME$/Desktop/MCTestBench/server/plugins/artifacts/FallenKitPvP_jar</output-path>
+    <root id="archive" name="FallenKitPvP.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$USER_HOME$/Desktop/MCTestBench/server/plugins/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="FallenKitPvP" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/MCTestBench/server/spigot-1.15.2.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
