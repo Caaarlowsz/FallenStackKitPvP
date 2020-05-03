@@ -1,12 +1,12 @@
 package com.fallenstack.fallenkitpvp;
 
 import org.bukkit.entity.Player;
-
 import java.util.HashMap;
+import java.util.UUID;
 
 public class BountyManager {
-    public static HashMap<Player, Integer> bountyList = new HashMap<Player, Integer>();
-    public static void BountyMap(Player player, Integer bounty){
+    public static HashMap<UUID, Integer> bountyList = new HashMap<UUID, Integer>();
+    public static void addOrReplaceBounty(UUID player, Integer bounty){
         bountyList.put(player, bounty);
         return;
     }

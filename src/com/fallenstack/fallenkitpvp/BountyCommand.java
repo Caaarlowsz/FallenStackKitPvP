@@ -1,13 +1,16 @@
 package com.fallenstack.fallenkitpvp;
-
-import com.earth2me.essentials.Essentials;
+import com.earth2me.essentials.api.NoLoanPermittedException;
+import com.earth2me.essentials.api.UserDoesNotExistException;
+import net.ess3.api.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import com.earth2me.essentials.api.Economy.*;
+
+import java.math.BigDecimal;
 
 
 public class BountyCommand implements CommandExecutor {
@@ -23,7 +26,7 @@ public class BountyCommand implements CommandExecutor {
             return true;
         }
         Player bountySender = (Player) commandSender;
-        Player bountiedPlayer = Bukkit.getServer().getPlayer(args[0]);
+        OfflinePlayer bountiedPlayer = Bukkit.getServer().getOfflinePlayer(args[0]);
         if(Utilites.isStringInteger(args[1]) == false){
             commandSender.sendMessage(ChatColor.RED + "Error: Invalid bounty type, bounties cannot have decimals...");
             return true;
@@ -35,24 +38,22 @@ public class BountyCommand implements CommandExecutor {
             return true;
         }
         else {
-            //Existing Bounty
-
-
-            //New Bounty
             if (bountiedPlayer != null) {
-                if (bountiedPlayer. == true) {
-                    if (Essentials >= bounty) {
-                        BountyManager.BountyMap(bountiedPlayer, bounty);
-                        // Essentials.getPlayer(bountySender).getBalance().takeBalance(bounty);
-                        bountiedPlayer.sendMessage(ChatColor.DARK_RED + "You've got a price on your head of" + bounty + " by " + bountySender);
-                        bountySender.sendMessage(ChatColor.GREEN + "You've placed a bounty on " + ChatColor.BLUE + bountiedPlayer + ChatColor.GREEN + "for the amount of " + bounty);
-                        return true;
-                    } else {
-                        bountySender.sendMessage(ChatColor.RED + "Error: You don't have enough money to set that bounty!");
-                        return true;
+                if (bountiedPlayer.isOnline()== true) {
+                    try {
+                        if (Economy.hasEnough(bountySender.getDisplayName(),bounty)) {
+                            BountyManager.addOrReplaceBounty(bountiedPlayer.getUniqueId(), bounty);
+                            Economy.substract(bountySender.getDisplayName(), BigDecimal.valueOf(bounty));
+                            FallenStackKitPvP.getEssentials.getUser(bountiedPlayer.getUniqueId()).addMail(ChatColor.DARK_RED + "You've got a price on your head of" + bounty + " by " + bountySender);
+                            bountySender.sendMessage(ChatColor.GREEN + "You've placed a bounty on " + ChatColor.BLUE + bountiedPlayer + ChatColor.GREEN + "for the amount of " + bounty);
+                        } else {
+                            bountySender.sendMessage(ChatColor.RED + "Error: You don't have enough money to set that bounty!");
+                            return true;
+                        }
+                    } catch (UserDoesNotExistException | NoLoanPermittedException e) {
+                        e.printStackTrace();
+                        bountySender.sendMessage(ChatColor.RED + "Error");
                     }
-                } else {
-
                 }
             }
         }

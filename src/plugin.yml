@@ -1,9 +1,29 @@
 name: FallenKitPvP
 description: Fallen Stack Kit PvP Core
 version: 1.0
+author: Colin Carhart (FallenStack) github.com/FallenStack
+api-version: 1.15
 main: com.fallenstack.fallenkitpvp.FallenStackKitPvP
+depend: [EssentialsX] [Vault]
 commands:
-  sb:
-    description: This command spawns a falling blue wool block at the desired cords
-    permission: fallenkitpvp.fallenblockcommand
+  regeneration:
+    description: This command will give the player regeneration for 30 seconds...
+    aliases: [regen,reg]
+    permission: fallenkitpvp.regenerationcommand
+  bounty:
+    description: This command allows you to place bounties on players...
+    aliases: [b]
+    permission: fallenkitpvp.bountycommand
+  fireresistance:
+    description: This command will give the player fire resistance for 30 seconds...
+    aliases: [fireresis, fire]
+    permission: fallenkitpvp.fireresistancecommand
+  speedboost:
+    description: This command will give the player a speed boost for 30 seconds...
+    aliases: [spd, speedb]
+    permission: fallenkitpvp.speedcommand
+  jumpboost:
+    description: This command will give the player jump boost for 30 seconds...
+    aliases: [jb,jumpb]
+    permission: fallenkitpvp.jumpboostcommand
 
