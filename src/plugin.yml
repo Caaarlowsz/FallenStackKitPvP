@@ -4,7 +4,7 @@ version: 1.0
 author: Colin Carhart (FallenStack) github.com/FallenStack
 api-version: 1.15
 main: com.fallenstack.fallenkitpvp.FallenStackKitPvP
-depend: [EssentialsX] [Vault]
+depend: [Essentials, Vault]
 commands:
   regeneration:
     description: This command will give the player regeneration for 30 seconds...
