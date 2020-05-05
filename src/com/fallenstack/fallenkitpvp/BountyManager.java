@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class BountyManager {
-    public static HashMap<User, Integer> bountyList = new HashMap<User, Integer>();
-    public static void addOrReplaceBounty(User player, Integer bounty){
-        bountyList.put(player, bounty);
+    public static HashMap<UUID, Integer> bountyList = new HashMap<UUID, Integer>();
+    public static void addOrReplaceBounty(UUID playerUUID, Integer bounty){
+        bountyList.put(playerUUID, bounty);
         return;
     }
 

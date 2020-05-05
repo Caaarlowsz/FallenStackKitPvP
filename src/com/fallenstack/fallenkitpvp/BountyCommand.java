@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 
 @SuppressWarnings("deprecation")
@@ -28,13 +29,14 @@ public class BountyCommand implements CommandExecutor {
             return true;
         }
         Player bountySender =  (Player) commandSender;
-        User bountiedPlayer = FallenStackKitPvP.ess.getUser(args[0]);
-        if(!(bountiedPlayer instanceof User)){
+        User bountiedUser = FallenStackKitPvP.ess.getUser(args[0]);
+        UUID bountiedUUID = Bukkit.getServer().getPlayer(args[0]).getUniqueId();
+        if(!(bountiedUser instanceof User)){
             bountySender.sendMessage(ChatColor.RED + "Error: Cannot place bounties on non-players...");
             return true;
         }
         /*
-        if(bountySender == bountiedPlayer){
+        if(bountySender == bountiedUser){
             bountySender.sendMessage(ChatColor.RED + "Error: You cannot place bounties on yourself...");
             return true;
         */
@@ -49,13 +51,13 @@ public class BountyCommand implements CommandExecutor {
             return true;
         }
         else {
-            if(bountiedPlayer != null) {
+            if(bountiedUser != null) {
                     try {
                         if (Economy.hasEnough(bountySender.getName(),bounty)) {
-                            BountyManager.addOrReplaceBounty(bountiedPlayer, bounty);
+                            BountyManager.addOrReplaceBounty(bountiedUUID, bounty);
                             Economy.substract(bountySender.getName(), BigDecimal.valueOf(bounty));
-                            bountiedPlayer.addMail(ChatColor.DARK_RED + "You've got a price on your head of $" + bounty + " by " + bountySender.getName());
-                            bountySender.sendMessage(ChatColor.GREEN + "You've placed a bounty on " + ChatColor.BLUE + bountiedPlayer.getName() + ChatColor.GREEN + " for the amount of " + bounty);
+                            bountiedUser.addMail(ChatColor.DARK_RED + "You've got a price on your head of $" + bounty + " by " + bountySender.getName());
+                            bountySender.sendMessage(ChatColor.GREEN + "You've placed a bounty on " + ChatColor.BLUE + bountiedUser.getName() + ChatColor.GREEN + " for the amount of " + bounty);
                         } else {
                             bountySender.sendMessage(ChatColor.RED + "Error: You don't have enough money to set that bounty!");
                             return true;
